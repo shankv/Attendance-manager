@@ -21,8 +21,8 @@
   
   <div class="buttons-con">
     <div class="action-link-wrap">
-      <a onclick="history.back(-1)" class="link-button link-back-button">student</a>
-      <a href="" class="link-button">Teacher</a>
+      <a href="teacher_login.jsp" class="link-button link-back-button">Teacher</a>
+      <a href="" class="link-button">Student</a>
     </div>
   </div>
 </div>
