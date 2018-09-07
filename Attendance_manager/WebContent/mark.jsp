@@ -7,8 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
- <input type="button" value="ADD STUDENT" onclick="window.location.href='add_student.jsp';return false;"/></br>
-  <input type="button" value="mark " onclick="window.location.href='mark.jsp';return false;"/></br>
- 
+
 </body>
 </html>

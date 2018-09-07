@@ -43,6 +43,15 @@ public class student {
 		this.rollNo = rollNo;
 		
 	}
+	public student(int rollNo,String name, int attend, int total, double percentage) {
+		super();
+		this.name = name;
+		this.rollNo = rollNo;
+		this.attend = attend;
+		this.total = total;
+		this.percentage = percentage;
+	}
+	
 	
 	
 	

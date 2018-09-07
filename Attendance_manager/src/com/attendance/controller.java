@@ -1,6 +1,7 @@
 package com.attendance;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.RequestDispatcher;
@@ -62,19 +63,35 @@ public class controller extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		case "LIST":
+			try {
+				listStudent(request,response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 		}
 	}
 
 
 
+	private void listStudent(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		// TODO Auto-generated method stub
+		List<student> theStudent =xxx.getStudent();
+		request.setAttribute("STUDENTINFO", theStudent);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/list_student.jsp");
+				dispatcher.forward(request, response);
+	}
+
 	private void addStudent(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
 		int rollNo =Integer.parseInt(request.getParameter("rollNo"));
 		String name = request.getParameter("name");
+
 		student theStudent = new student(rollNo,name);
 		xxx.addStudent(theStudent);
-		
+		listStudent(request, response);
 	}
 
 
