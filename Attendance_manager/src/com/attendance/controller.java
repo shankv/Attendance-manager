@@ -1,6 +1,7 @@
 package com.attendance;
 
 import java.io.IOException;
+import java.util.Enumeration;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -70,11 +71,58 @@ public class controller extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		case "MARK":
+			try {
+				mark(request,response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		case"UPDATE":
+			 try {
+				markupdate(request,response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			 
 			
 		}
 	}
 
 
+
+	private void markupdate(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		 String[] rollNo =(request.getParameterValues("rollNo"));
+		 String[] name =request.getParameterValues("name");
+		 String[] mark =request.getParameterValues("mark");
+		 for(int i=0;i<name.length;i++){
+			 int roll =Integer.parseInt(rollNo[i]);
+			 int marker =Integer.parseInt(mark[i]);
+			 int add=0;
+			 if(marker==1)
+			 {
+			   	 add=1;
+			 }
+			 xxx.mark(roll,name[i],add);
+		 }
+           
+
+	
+		 }
+		 
+		
+	
+
+	private void mark(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		// TODO Auto-generated method stub
+		List<student> theStudent =xxx.getStudent();
+		request.setAttribute("STUDENTINFO", theStudent);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/mark.jsp");
+				dispatcher.forward(request, response);
+
+	}
 
 	private void listStudent(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
