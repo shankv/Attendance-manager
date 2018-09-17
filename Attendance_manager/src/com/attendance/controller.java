@@ -1,6 +1,7 @@
 package com.attendance;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 
@@ -13,11 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
-
-
-/**
- * Servlet implementation class controller
- */
 @WebServlet("/controller")
 public class controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -93,25 +89,29 @@ public class controller extends HttpServlet {
 
 
 	private void markupdate(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
-		 String[] rollNo =(request.getParameterValues("rollNo"));
-		 String[] name =request.getParameterValues("name");
-		 String[] mark =request.getParameterValues("mark");
-		 for(int i=0;i<name.length;i++){
+		 
+		 String rollNo[] = request.getParameterValues("rollNo");
+		 String name[] = request.getParameterValues("name");
+		 int add=0;
+		 for(int i=0;i<rollNo.length;i++)
+		 {   
+			 int x =i+1;
 			 int roll =Integer.parseInt(rollNo[i]);
-			 int marker =Integer.parseInt(mark[i]);
-			 int add=0;
-			 if(marker==1)
+			 String nam =name[i];
+			 String a = request.getParameter(String.valueOf(x));
+			 if("1".equals(a))
 			 {
-			   	 add=1;
+				  add=1;
 			 }
-			 xxx.mark(roll,name[i],add);
-		 }
-           
-
+			 else{
+				 add=0;
+			 }
+			 System.out.println(roll +" "+" "+  nam+" " + a );
+		xxx.mark(roll,nam, add);
 	
 		 }
-		 
+		 listStudent(request, response);
+	}
 		
 	
 

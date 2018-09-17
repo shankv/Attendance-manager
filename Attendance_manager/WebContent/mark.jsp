@@ -20,8 +20,8 @@
              
              <td> <input type="hidden" name="rollNo" value="${tempStudent.rollNo}"/> ${tempStudent.rollNo}</td> 
             <td> <input type="hidden" name="name" value="${tempStudent.name}"/> ${tempStudent.name}</td>
-            <td> <input type="radio" name="mark" value="1">present</td>
-            <td> <input type="radio" name="mark" value="0">Absent</td>
+            <td> <input type="radio" name="${tempStudent.rollNo}" value="1">present</td>
+            <td> <input type="radio" name="${tempStudent.rollNo}" value="0">Absent</td>
             </tr>
              
      </c:forEach>

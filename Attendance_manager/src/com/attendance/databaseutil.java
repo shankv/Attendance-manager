@@ -82,16 +82,18 @@ public class databaseutil {
 			 
 		 }
 }
-	public void mark(int roll, String string, int add)throws Exception {
+	public void mark(int roll, String nam, int add)throws Exception {
 		// TODO Auto-generated method stub
 		
 		Connection con =null;
-		Statement mys =null;
+		
 		PreparedStatement ps =null;
 		ResultSet rs =null;
-		int rollNo=0 ,atten=0 ,total=0;
-		double percentage;
-		String name;
+		int rollNo=0 ,total=0;
+		double percentage=0;
+		String name=null;
+		int attend1=0;
+
 		
 		try{
 			
@@ -104,26 +106,27 @@ public class databaseutil {
 			{
 				  rollNo = rs.getInt("roll_no");
 				 name = rs.getString("name");
-				  attend = rs.getInt("attend");
+				  attend1 = rs.getInt("attend");
 				  total = rs.getInt("total");
 				  percentage = rs.getDouble("percentage");
 			}
-			attend+=add;
+			attend1+=add;
 			total=total+1;
-			percentage =100*(attend/total);
+			percentage =100*(attend1/total);
 			
 			con=datasource.getConnection();
-			String Sql1 ="insert into student "+ "(roll_no,name,attend,total,percentage)"+"value(?,?,?,?,?)";
+			String Sql1 ="update student "+ "set name=?,attend=?,total=?,percentage=? "+"where roll_no=?";
 			ps=con.prepareStatement(Sql1);
-			ps.setInt(1, rollNo);
-			ps.setString(2, name);
-            ps.setInt(3,attend);
-            ps.setInt(4, total);
-            ps.setDouble(5, percentage);
+			ps.setInt(5, rollNo);
+			ps.setString(1, name);
+            ps.setInt(2,attend1);
+            ps.setInt(3, total);
+            ps.setDouble(4, percentage);
             ps.execute();
 			
 		}finally{
-			ps.close();con.close();rs.close();mys.close();
+			ps.close();con.close();rs.close();
+		
 		}
 		
 	}}
