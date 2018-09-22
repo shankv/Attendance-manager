@@ -37,10 +37,10 @@ public class student {
 	public void setPercentage(double percentage) {
 		this.percentage = percentage;
 	}
-	public student( int rollNo, String name) {
+	public student(String name) {
 		super();
 		this.name = name;
-		this.rollNo = rollNo;
+	
 		
 	}
 	public student(int rollNo,String name, int attend, int total, double percentage) {
@@ -51,6 +51,7 @@ public class student {
 		this.total = total;
 		this.percentage = percentage;
 	}
+	
 	
 	
 	

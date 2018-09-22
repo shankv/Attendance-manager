@@ -25,10 +25,9 @@ public class databaseutil {
 		PreparedStatement ps =null;
 		try{ 
 			con =datasource.getConnection();
-			String sql ="insert into student"+"(roll_no,name)"+ "value(?,?)";
+			String sql ="insert into student"+"(name)"+ "value(?)";
 			ps=con.prepareStatement(sql);
-			ps.setInt(1, theStudent2.getRollNo());
-			ps.setString(2, theStudent2.getName());
+			ps.setString(1, theStudent2.getName());
 			ps.execute();
 			}finally{
 				ps.close();

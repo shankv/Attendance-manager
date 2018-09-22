@@ -106,7 +106,7 @@ public class controller extends HttpServlet {
 			 else{
 				 add=0;
 			 }
-			 System.out.println(roll +" "+" "+  nam+" " + a );
+			 
 		xxx.mark(roll,nam, add);
 	
 		 }
@@ -134,10 +134,9 @@ public class controller extends HttpServlet {
 
 	private void addStudent(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
-		int rollNo =Integer.parseInt(request.getParameter("rollNo"));
 		String name = request.getParameter("name");
 
-		student theStudent = new student(rollNo,name);
+		student theStudent = new student(name);
 		xxx.addStudent(theStudent);
 		listStudent(request, response);
 	}
@@ -149,18 +148,19 @@ public class controller extends HttpServlet {
 		String theUser = request.getParameter("user");
 		
 		String thepass = request.getParameter("password");
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/teacher_main.jsp"); 
-		dispatcher.forward(request, response); 
-	/*	if("shashank".equals(theUser) && "verma".equals(thepass))
+	 
+		if("shashank".equals(theUser) && "verma".equals(thepass))
 		{  
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/teacher_main.jsp"); 
-			dispatcher.forward(request, response);
+			List<student> theStudent =xxx.getStudent();
+			request.setAttribute("STUDENTINFO", theStudent);
+			RequestDispatcher dispatcher1 = request.getRequestDispatcher("/teacher_main.jsp"); 
+			dispatcher1.forward(request, response);
 		}
 		else{
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/teacher_login.jsp");
-			dispatcher.forward(request, response);
+			RequestDispatcher dispatcher2 = request.getRequestDispatcher("/teacher_login.jsp");
+			dispatcher2.forward(request, response);
 			String error ="Invalid deatails";
 			request.setAttribute("ERROR", error);
-		} */
+		} 
 	}
 }
