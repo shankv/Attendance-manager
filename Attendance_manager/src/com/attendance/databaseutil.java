@@ -111,8 +111,9 @@ public class databaseutil {
 			}
 			attend1+=add;
 			total=total+1;
-			percentage =100*(attend1/total);
-			
+			System.out.println(attend1+" "+total);
+			percentage =(attend1*100)/total;
+			System.out.println(percentage);
 			con=datasource.getConnection();
 			String Sql1 ="update student "+ "set name=?,attend=?,total=?,percentage=? "+"where roll_no=?";
 			ps=con.prepareStatement(Sql1);
@@ -128,4 +129,56 @@ public class databaseutil {
 		
 		}
 		
+	}
+	public List<student> infoStudent(int id) throws Exception {
+		// TODO Auto-generated method stub
+		 List<student> theStudent = new ArrayList<>();
+		 Connection con = null;
+		 Statement mys =null;
+		 ResultSet myresult =null;
+		 PreparedStatement ps= null;
+		 System.out.println(id);
+		 String sql = "select * from student where roll_no=?";
+		 try{
+			 con = datasource.getConnection();
+			 ps =con.prepareStatement(sql);
+			 ps.setInt(1, id);
+			 myresult = ps.executeQuery();
+			 
+			 while(myresult.next())
+			 {
+				 int rollNo = myresult.getInt("roll_no");
+				 String name = myresult.getString("name");
+				 int attend = myresult.getInt("attend");
+				 int total = myresult.getInt("total");
+				 double percentage = myresult.getDouble("percentage");
+				 
+				student tempStudent  = new student(rollNo,name,attend , total ,percentage);
+				theStudent.add(tempStudent);
+			 }
+			 return theStudent;
+		 } finally{
+			  try{
+				  if(con != null)
+				  {
+					  con.close();
+				  }
+				  if(mys != null)
+				  {
+					  mys.close();
+				  }
+				  if(myresult != null)
+				  {
+					  myresult.close();
+				  }
+			  }catch(Exception e){
+				  e.printStackTrace( );
+				  
+			  }
+			 
+		
+		
 	}}
+	
+	
+}

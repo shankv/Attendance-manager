@@ -81,6 +81,14 @@ public class controller extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		case"STUDENT":
+			try{
+				infoStudent(request,response);
+			}
+			catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
 			 
 			
 		}
@@ -88,12 +96,26 @@ public class controller extends HttpServlet {
 
 
 
+	private void infoStudent(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		// TODO Auto-generated method stub
+		int id =Integer.parseInt(request.getParameter("rollNo"));
+		List <student> theStudent=xxx.infoStudent(id);
+		for(student x :theStudent)
+		{
+			System.out.println(x);
+		}
+		request.setAttribute("STUDENTINFO", theStudent);
+		RequestDispatcher dispatcher1 = request.getRequestDispatcher("/studentmain.jsp"); 
+		dispatcher1.forward(request, response);	
+		
+	}
+
 	private void markupdate(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		 
 		 String rollNo[] = request.getParameterValues("rollNo");
 		 String name[] = request.getParameterValues("name");
 		 int add=0;
-		 for(int i=0;i<rollNo.length;i++)
+		 for(int i=0;i<name.length;i++)
 		 {   
 			 int x =i+1;
 			 int roll =Integer.parseInt(rollNo[i]);
@@ -106,12 +128,15 @@ public class controller extends HttpServlet {
 			 else{
 				 add=0;
 			 }
-			 
+			
+
 		xxx.mark(roll,nam, add);
 	
 		 }
-		 listStudent(request, response);
-	}
+		 List<student> theStudent =xxx.getStudent();
+			request.setAttribute("STUDENTINFO", theStudent);
+			RequestDispatcher dispatcher1 = request.getRequestDispatcher("/teacher_main.jsp"); 
+			dispatcher1.forward(request, response);	}
 		
 	
 
@@ -138,7 +163,10 @@ public class controller extends HttpServlet {
 
 		student theStudent = new student(name);
 		xxx.addStudent(theStudent);
-		listStudent(request, response);
+		 List<student> theStudent1 =xxx.getStudent();
+			request.setAttribute("STUDENTINFO", theStudent1);
+			RequestDispatcher dispatcher1 = request.getRequestDispatcher("/teacher_main.jsp"); 
+			dispatcher1.forward(request, response);	
 	}
 
 
