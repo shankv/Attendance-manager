@@ -99,11 +99,7 @@ public class controller extends HttpServlet {
 	private void infoStudent(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
 		int id =Integer.parseInt(request.getParameter("rollNo"));
-		List <student> theStudent=xxx.infoStudent(id);
-		for(student x :theStudent)
-		{
-			System.out.println(x);
-		}
+		List<student> theStudent=xxx.infoStudent(id);
 		request.setAttribute("STUDENTINFO", theStudent);
 		RequestDispatcher dispatcher1 = request.getRequestDispatcher("/studentmain.jsp"); 
 		dispatcher1.forward(request, response);	

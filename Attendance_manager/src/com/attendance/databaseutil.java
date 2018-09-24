@@ -111,9 +111,7 @@ public class databaseutil {
 			}
 			attend1+=add;
 			total=total+1;
-			System.out.println(attend1+" "+total);
 			percentage =(attend1*100)/total;
-			System.out.println(percentage);
 			con=datasource.getConnection();
 			String Sql1 ="update student "+ "set name=?,attend=?,total=?,percentage=? "+"where roll_no=?";
 			ps=con.prepareStatement(Sql1);
@@ -137,9 +135,9 @@ public class databaseutil {
 		 Statement mys =null;
 		 ResultSet myresult =null;
 		 PreparedStatement ps= null;
-		 System.out.println(id);
-		 String sql = "select * from student where roll_no=?";
+		
 		 try{
+				String sql = "select * from student where roll_no=?";
 			 con = datasource.getConnection();
 			 ps =con.prepareStatement(sql);
 			 ps.setInt(1, id);
@@ -147,13 +145,14 @@ public class databaseutil {
 			 
 			 while(myresult.next())
 			 {
-				 int rollNo = myresult.getInt("roll_no");
+				 int roll = myresult.getInt("roll_no");
 				 String name = myresult.getString("name");
 				 int attend = myresult.getInt("attend");
 				 int total = myresult.getInt("total");
 				 double percentage = myresult.getDouble("percentage");
+				
 				 
-				student tempStudent  = new student(rollNo,name,attend , total ,percentage);
+				student tempStudent  = new student(id,name,attend , total ,percentage);
 				theStudent.add(tempStudent);
 			 }
 			 return theStudent;

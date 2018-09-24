@@ -10,14 +10,14 @@
 <title>Insert title here</title>
 </head>
 <body>
- <h1 style="margin-left:600px;color:white;">Attendance Manger</h1>
+ <h1 style="margin-left:600px;color:white; font-size:60px;">Your Attendance</h1>
  
   <c:url var="tempLink" value="controller">
         <c:param name="command" value="MARK"/></c:url>
   <div class="buttons-con" style="margin-left:500px">
     <div class="action-link-wrap">
-      <a href="add_student.jsp" class="link-button link-back-button">Add Student</a>
-      <a href="${tempLink}" class="link-button">Mark Attendance</a>
+      <a href="main.jsp" class="link-button link-back-button">Logout</a>
+     
     </div>
   </div>
    
@@ -43,16 +43,17 @@
 </tr>
 </thead>
 <tbody class="table-hover">
-
+        <c:forEach var="tempStudent" items="${STUDENTINFO}"> 
+    
         <tr>
-         <td> ${STUDENTINFO.rollNo} </td>
-         <td> ${STUDENTINFO.name}</td>
-         <td> ${STUDENTINFO.attend}</td>
-         <td> ${STUDENTINFO.total}</td>
-         <td> ${STUDENTINFO.percentage}</td>
+         <td> ${tempStudent.rollNo} </td>
+         <td> ${tempStudent.name}</td>
+         <td> ${tempStudent.attend}</td>
+         <td> ${tempStudent.total}</td>
+         <td> ${tempStudent.percentage}</td>
         
      </tr>
-
+</c:forEach>
 
 </tr>
 
